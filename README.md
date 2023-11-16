@@ -59,8 +59,6 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./myjob/:/etc/cron.d/myjob
-    ports:
-      - "127.0.0.1:80:80"
 
 
 ```
