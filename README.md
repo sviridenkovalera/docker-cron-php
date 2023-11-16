@@ -52,7 +52,7 @@ File `./myjob`
 version: '3.1'
 
 services:
-  web:
+  cron:
     image: cowrvalera/docker-cron-php:v1.0.0
     restart: unless-stopped
     platform: linux/amd64
