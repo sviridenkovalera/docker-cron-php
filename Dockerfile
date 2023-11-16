@@ -58,11 +58,11 @@ WORKDIR /usr/lib/php/20131226/
 RUN curl https://downloads.ioncube.com/loader_downloads/ioncube_loaders${BUILDX_ARCH}.tar.gz | tar -xz
 RUN echo "zend_extension = \"/usr/lib/php/20131226/ioncube/ioncube_loader_lin_${PHP_VERSION}.so\"" > /etc/php/${PHP_VERSION}/apache2/conf.d/00-ioncube.ini
 
-RUN rm /var/www/html/index.html && \
-    apt-get -y clean && \
+RUN apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
+RUN id -u www-data &>/dev/null || useradd -r -u 33 -g www-data www-data
+    
 
 RUN ln -sf /proc/self/fd/1 /var/log/cron.log \
     && ln -sf /proc/self/fd/2 /var/log/cron.log
