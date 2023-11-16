@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+  web:
+    image: cowrvalera/docker-apache-php:v1.0.0
+    restart: unless-stopped
+    platform: linux/amd64
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "127.0.0.1:80:80"
