@@ -37,7 +37,7 @@ Modules:
 
 File `./myjob`
 ```txt
-* * * * * www-data /usr/bin/php -r 'echo "Hello";' >> /proc/1/fd/1 2>> /proc/1/fd/2
+* * * * * www-data /usr/bin/php -r 'echo "Hello";'
 
 ```
 
