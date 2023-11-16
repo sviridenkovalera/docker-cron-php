@@ -1,4 +1,4 @@
-# Ubuntu(22.04) + Apache + PHP 8.2 + Ioncube x86-64
+# Ubuntu(22.04) + Cron + PHP 8.2 + Ioncube x86-64
 
 Webroot: /var/www/html
 
