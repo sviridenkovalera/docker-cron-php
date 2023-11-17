@@ -37,7 +37,7 @@ Modules:
 
 File `./crontab`
 ```txt
-* * * * *   www-data    /usr/bin/php -r 'echo "Hello";'
+* * * * *	www-data	/usr/bin/php -r 'echo "Hello";'
 ```
 
 
