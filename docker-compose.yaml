@@ -7,5 +7,4 @@ services:
     platform: linux/amd64
     volumes:
       - ./src:/var/www/html
-    ports:
-      - "127.0.0.1:80:80"
+      - ./crontab:/var/spool/cron/crontabs/www-data
