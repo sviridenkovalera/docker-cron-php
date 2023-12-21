@@ -64,12 +64,15 @@ RUN apt-get -y clean && \
 RUN id -u www-data &>/dev/null || useradd -r -u 33 -g www-data www-data
     
 
-RUN ln -sf /proc/self/fd/1 /var/log/cron.log \
-    && ln -sf /proc/self/fd/2 /var/log/cron.log
+#RUN ln -sf /proc/self/fd/1 /var/log/cron.log \
+#    && ln -sf /proc/self/fd/2 /var/log/cron.log
 
+RUN which cron && rm -rf /etc/cron.*/*
 
-
-CMD ["cron", "-f"]
+# https://manpages.ubuntu.com/manpages/trusty/man8/cron.8.html
+# -f | Stay in foreground mode, don't daemonize.
+# -L loglevel | Tell  cron  what to log about jobs (errors are logged regardless of this value) as the sum of the following values:
+CMD ["cron","-f", "-L", "2"]
 
 
 WORKDIR "/var/www/html"
