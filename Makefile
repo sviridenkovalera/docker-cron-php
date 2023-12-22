@@ -1,6 +1,5 @@
 build:
-	docker build -t cowrvalera/docker-cron-php:v1.3.1 --platform linux/amd64 .
-
+	docker build -t cowrvalera/docker-cron-php:1.4.0 --platform linux/amd64 .
 
 run_dev:
 	docker-compose up -d

@@ -58,13 +58,36 @@ WORKDIR /usr/lib/php/20131226/
 RUN curl https://downloads.ioncube.com/loader_downloads/ioncube_loaders${BUILDX_ARCH}.tar.gz | tar -xz
 RUN echo "zend_extension = \"/usr/lib/php/20131226/ioncube/ioncube_loader_lin_${PHP_VERSION}.so\"" > /etc/php/${PHP_VERSION}/apache2/conf.d/00-ioncube.ini
 
+
+RUN apt install -y vim sudo
+
+
 RUN apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN id -u www-data &>/dev/null || useradd -r -u 33 -g www-data www-data
-    
-
-CMD crontab -u www-data /crontab && (cat /proc/1/environ | tr '\0' '\n' | sed '/HOME/d' | sed 's/^/export /' > /runner.sh && echo '"$@"' >> /runner.sh && chmod 777 /runner.sh) && cron -f -L 2
 
 
-WORKDIR "/var/www/html"
+
+
+# Latest releases available at https://github.com/aptible/supercronic/releases
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.29/supercronic-linux-amd64 \
+    SUPERCRONIC=supercronic-linux-amd64 \
+    SUPERCRONIC_SHA1SUM=cd48d45c4b10f3f0bfdd3a57d054cd05ac96812b
+
+RUN curl -fsSLO "$SUPERCRONIC_URL" \
+ && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
+ && chmod +x "$SUPERCRONIC" \
+ && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
+ && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
+
+
+
+WORKDIR "/var/www/html"    
+
+USER www-data
+
+CMD /usr/local/bin/supercronic-linux-amd64 /crontab
+
+
+

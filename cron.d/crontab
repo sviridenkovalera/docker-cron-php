@@ -1,1 +1,2 @@
-* * * * *   bash -c "/usr/bin/php -r 'echo \"Hello\";'"
+* * * * *   /usr/bin/php -r 'echo getenv("PHP_VERSION");'
+* * * * *   /usr/bin/php -r 'echo "Hello";'
