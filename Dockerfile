@@ -64,12 +64,7 @@ RUN apt-get -y clean && \
 RUN id -u www-data &>/dev/null || useradd -r -u 33 -g www-data www-data
     
 
-
-RUN mkdir -p /etc/cron.d
-
-RUN touch /var/log/cron.log
-
-CMD cron && tail -f /var/log/cron.log
+CMD crontab /crontab && cron -f -L 2
 
 
 WORKDIR "/var/www/html"

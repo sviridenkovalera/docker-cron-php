@@ -35,14 +35,14 @@ Modules:
 ## RUN
 
 
-File `./crontab`
+File `./crond./crontab`
 ```txt
-* * * * *	www-data	/usr/bin/php -r 'echo "Hello";'
+* * * * *	www-data	/usr/bin/php -r 'echo "Hello";'  > /dev/stdout 2>/dev/stderr
 ```
 
 
 ```sh
-  docker run -it --rm -v "./src/:/var/www/html" -v "./crontab:/etc/crontab" --platform linux/amd64 cowrvalera/docker-cron-php:v1.2.0
+docker run -it --rm -v "./src/:/var/www/html" -v "./cron.d/crontab:/crontab" --platform linux/amd64 cowrvalera/docker-cron-php:1.2.1
 ```
 
 ## Examples(docker-compose.yaml)
@@ -52,12 +52,12 @@ version: '3.1'
 
 services:
   cron:
-    image: cowrvalera/docker-cron-php:v1.2.0
+    image: cowrvalera/docker-cron-php:1.2.1
     restart: unless-stopped
     platform: linux/amd64
     volumes:
       - ./src:/var/www/html
-      - ./cron.d:/etc/cron.d
+      - ./cron.d/crontab:/crontab
 
 
 ```
