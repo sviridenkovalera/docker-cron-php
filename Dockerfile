@@ -64,7 +64,7 @@ RUN apt-get -y clean && \
 RUN id -u www-data &>/dev/null || useradd -r -u 33 -g www-data www-data
     
 
-CMD crontab /crontab && (cat /proc/1/environ | tr '\0' '\n' | sed '/HOME/d' | sed 's/^/export /' > /runner.sh && echo '"$@"' >> /runner.sh && chmod 777 /runner.sh) && cron -f -L 2
+CMD crontab -u www-data /crontab && (cat /proc/1/environ | tr '\0' '\n' | sed '/HOME/d' | sed 's/^/export /' > /runner.sh && echo '"$@"' >> /runner.sh && chmod 777 /runner.sh) && cron -f -L 2
 
 
 WORKDIR "/var/www/html"
