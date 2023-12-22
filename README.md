@@ -42,7 +42,7 @@ File `./crontab`
 
 
 ```sh
-  docker run -it --rm -v "./src/:/var/www/html" -v "./crontab:/etc/crontab" --platform linux/amd64 cowrvalera/docker-cron-php:v1.0.1
+  docker run -it --rm -v "./src/:/var/www/html" -v "./crontab:/etc/crontab" --platform linux/amd64 cowrvalera/docker-cron-php:v1.2.0
 ```
 
 ## Examples(docker-compose.yaml)
@@ -52,12 +52,12 @@ version: '3.1'
 
 services:
   cron:
-    image: cowrvalera/docker-cron-php:v1.0.1
+    image: cowrvalera/docker-cron-php:v1.2.0
     restart: unless-stopped
     platform: linux/amd64
     volumes:
       - ./src:/var/www/html
-      - ./crontab:/etc/crontab
+      - ./cron.d:/etc/cron.d
 
 
 ```
