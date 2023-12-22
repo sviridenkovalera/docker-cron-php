@@ -35,7 +35,7 @@ Modules:
 ## RUN
 
 
-File `./crond./crontab`
+File `./crond.d/crontab`
 ```txt
 * * * * *	www-data	/usr/bin/php -r 'echo "Hello";'  > /dev/stdout 2>/dev/stderr
 ```
